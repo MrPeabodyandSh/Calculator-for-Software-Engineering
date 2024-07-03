@@ -18,11 +18,6 @@ class Window : public wxFrame
 	wxString FirstNumber;
 	wxString SecondNumber;
 
-	float Answer = 0;
-	bool addClick = false;
-	bool subtractClick = false;
-	bool multiplyClick = false;
-	bool divideClick = false;
 public:
 
 
