@@ -41,7 +41,7 @@ void Window::AddClicked(wxCommandEvent& add)
 	Secondnumber = SecondNumber.c_str();
 
 	first = std::stof(Firstnumber);
-	second = std::stof(Secondnumber);
+	second = std::stof(Secondnumber);//
 
 	Answer = first + second;
 	addClick = true;
