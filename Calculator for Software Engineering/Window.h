@@ -23,6 +23,7 @@ class Window : public wxFrame
 	bool subtractClick = false;
 	bool multiplyClick = false;
 	bool divideClick = false;
+
 public:
 
 

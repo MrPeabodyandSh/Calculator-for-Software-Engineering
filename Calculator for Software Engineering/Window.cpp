@@ -30,20 +30,6 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 
 void Window::AddClicked(wxCommandEvent& add)
 {
-	std::string Firstnumber;
-	std::string Secondnumber;
-	float first = 0;
-	float second = 0;
-
-	FirstNumber = firstNumber->GetValue();
-	SecondNumber = secondNumber->GetValue();
-	Firstnumber = FirstNumber.c_str();
-	Secondnumber = SecondNumber.c_str();
-
-	first = std::stof(Firstnumber);
-	second = std::stof(Secondnumber);//
-
-	Answer = first + second;
 	addClick = true;
 }
 
@@ -67,9 +53,23 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 	if (addClick)
 	{
 		wxString addition;
+		std::string Firstnumber;
+		std::string Secondnumber;
+		float first = 0;
+		float second = 0;
 
+		FirstNumber = firstNumber->GetValue(); //Gets the value typed into the first text box
+		SecondNumber = secondNumber->GetValue();
+		Firstnumber = FirstNumber.c_str(); //Makes the number in the text box turn into a normal string
+		Secondnumber = SecondNumber.c_str();
+
+		first = std::stof(Firstnumber); //Turns the string into a float
+		second = std::stof(Secondnumber);
+
+		Answer = first + second;
 		addition = std::to_string(Answer);
 		answer->SetLabel(addition);
+		
 	}
 }
 
