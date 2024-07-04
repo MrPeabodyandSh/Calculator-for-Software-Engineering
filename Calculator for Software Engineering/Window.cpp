@@ -31,21 +31,33 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 void Window::AddClicked(wxCommandEvent& add)
 {
 	addClick = true;
+	subtractClick = false;
+	multiplyClick = false;
+	divideClick = false;
 }
 
 void Window::SubtractClicked(wxCommandEvent& subtract)
 {
-
+	addClick = false;
+	subtractClick = true;
+	multiplyClick = false;
+	divideClick = false;
 }
 
 void Window::MultiplyClicked(wxCommandEvent& multiply)
 {
-
+	addClick = false;
+	subtractClick = false;
+	multiplyClick = true;
+	divideClick = false;
 }
 
 void Window::DivideClicked(wxCommandEvent& divide)
 {
-
+	addClick = false;
+	subtractClick = false;
+	multiplyClick = false;
+	divideClick = true;
 }
 
 void Window::EqualsClicked(wxCommandEvent& equals)
@@ -70,6 +82,69 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		addition = std::to_string(Answer);
 		answer->SetLabel(addition);
 		
+	}
+
+	if (subtractClick)
+	{
+		wxString subtraction;
+		std::string Firstnumber;
+		std::string Secondnumber;
+		float first = 0;
+		float second = 0;
+
+		FirstNumber = firstNumber->GetValue(); 
+		SecondNumber = secondNumber->GetValue();
+		Firstnumber = FirstNumber.c_str(); 
+		Secondnumber = SecondNumber.c_str();
+
+		first = std::stof(Firstnumber); 
+		second = std::stof(Secondnumber);
+
+		Answer = first - second;
+		subtraction = std::to_string(Answer);
+		answer->SetLabel(subtraction);
+	}
+
+	if (multiplyClick)
+	{
+		wxString multiplication;
+		std::string Firstnumber;
+		std::string Secondnumber;
+		float first = 0;
+		float second = 0;
+
+		FirstNumber = firstNumber->GetValue();
+		SecondNumber = secondNumber->GetValue();
+		Firstnumber = FirstNumber.c_str();
+		Secondnumber = SecondNumber.c_str();
+
+		first = std::stof(Firstnumber);
+		second = std::stof(Secondnumber);
+
+		Answer = first * second;
+		multiplication = std::to_string(Answer);
+		answer->SetLabel(multiplication);
+	}
+
+	if (divideClick)
+	{
+		wxString division;
+		std::string Firstnumber;
+		std::string Secondnumber;
+		float first = 0;
+		float second = 0;
+
+		FirstNumber = firstNumber->GetValue();
+		SecondNumber = secondNumber->GetValue();
+		Firstnumber = FirstNumber.c_str();
+		Secondnumber = SecondNumber.c_str();
+
+		first = std::stof(Firstnumber);
+		second = std::stof(Secondnumber);
+
+		Answer = first / second;
+		division = std::to_string(Answer);
+		answer->SetLabel(division);
 	}
 }
 
