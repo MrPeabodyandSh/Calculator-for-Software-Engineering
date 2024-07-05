@@ -12,12 +12,12 @@ wxEND_EVENT_TABLE()
 
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), wxSize(500, 500))
 {
-	addButton = new wxButton(this, 1, "Add (+)", wxPoint(0, 360), wxSize(100, 100));
-	subtractButton = new wxButton(this, 2, "Subtract (-)", wxPoint(100, 360), wxSize(100, 100));
-	multiplyButton = new wxButton(this, 3, "Multiply (*)", wxPoint(200, 360), wxSize(100, 100));
-	divideButton = new wxButton(this, 4, "Divide (/)", wxPoint(300, 360), wxSize(100, 100));
+	addButton = new wxButton(this, 1, "Add (+)", wxPoint(0, 250), wxSize(100, 100));
+	subtractButton = new wxButton(this, 2, "Subtract (-)", wxPoint(0, 360), wxSize(100, 100));
+	multiplyButton = new wxButton(this, 3, "Multiply (*)", wxPoint(150, 250), wxSize(100, 100));
+	divideButton = new wxButton(this, 4, "Divide (/)", wxPoint(150, 360), wxSize(100, 100));
 	equalsButton = new wxButton(this, 5, "=", wxPoint(230, 50), wxSize(50, 50));
-	clearButton = new wxButton(this, 6, "Clear", wxPoint(400, 360), wxSize(100, 100));
+	clearButton = new wxButton(this, 6, "Clear", wxPoint(315, 300), wxSize(100, 100));
 
 	firstNumber = new wxTextCtrl(this, 7, "0", wxPoint(0, 50), wxSize(100, 20));
 	secondNumber = new wxTextCtrl(this, 8, "0", wxPoint(100, 50), wxSize(100, 20));
