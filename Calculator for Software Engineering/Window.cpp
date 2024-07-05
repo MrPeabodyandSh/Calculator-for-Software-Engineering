@@ -1,5 +1,15 @@
 #include "Window.h"
 
+
+wxBEGIN_EVENT_TABLE(Window, wxFrame)
+EVT_BUTTON(1, Window::AddClicked)
+EVT_BUTTON(2, Window::SubtractClicked)
+EVT_BUTTON(3, Window::MultiplyClicked)
+EVT_BUTTON(4, Window::DivideClicked)
+EVT_BUTTON(5, Window::EqualsClicked)
+EVT_BUTTON(6, Window::ClearClicked)
+wxEND_EVENT_TABLE()
+
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), wxSize(500, 500))
 {
 	addButton = new wxButton(this, 1, "Add (+)", wxPoint(0, 250), wxSize(100, 100));
@@ -71,7 +81,7 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		Answer = first + second;
 		addition = std::to_string(Answer);
 		answer->SetLabel(addition);
-		
+
 	}
 
 	if (subtractClick)
@@ -82,12 +92,12 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		float first = 0;
 		float second = 0;
 
-		FirstNumber = firstNumber->GetValue(); 
+		FirstNumber = firstNumber->GetValue();
 		SecondNumber = secondNumber->GetValue();
-		Firstnumber = FirstNumber.c_str(); 
+		Firstnumber = FirstNumber.c_str();
 		Secondnumber = SecondNumber.c_str();
 
-		first = std::stof(Firstnumber); 
+		first = std::stof(Firstnumber);
 		second = std::stof(Secondnumber);
 
 		Answer = first - second;

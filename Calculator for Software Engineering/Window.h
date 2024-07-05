@@ -8,9 +8,33 @@ class Window : public wxFrame
 	wxButton* subtractButton = nullptr;
 	wxButton* multiplyButton = nullptr;
 	wxButton* divideButton = nullptr;
+	wxButton* equalsButton = nullptr;
+	wxButton* clearButton = nullptr;
+
+	wxTextCtrl* firstNumber = nullptr;
+	wxTextCtrl* secondNumber = nullptr;
+	wxTextCtrl* answer = nullptr;
+
+	wxString FirstNumber;
+	wxString SecondNumber;
+
+	float Answer = 0;
+	bool addClick = false;
+	bool subtractClick = false;
+	bool multiplyClick = false;
+	bool divideClick = false;
 
 public:
 
-	Window();
-};
 
+	Window();
+	void AddClicked(wxCommandEvent& add);
+	void SubtractClicked(wxCommandEvent& subtract);
+	void MultiplyClicked(wxCommandEvent& multiply);
+	void DivideClicked(wxCommandEvent& divide);
+	void EqualsClicked(wxCommandEvent& equals);
+	void ClearClicked(wxCommandEvent& clear);
+
+
+	wxDECLARE_EVENT_TABLE();
+};
