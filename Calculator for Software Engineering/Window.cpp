@@ -150,5 +150,7 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 
 void Window::ClearClicked(wxCommandEvent& clear)
 {
-
+	firstNumber->SetLabel("0");
+	secondNumber->SetLabel("0");
+	answer->SetLabel("0");
 }
