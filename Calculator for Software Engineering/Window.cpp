@@ -154,3 +154,4 @@ void Window::ClearClicked(wxCommandEvent& clear)
 	secondNumber->SetLabel("0");
 	answer->SetLabel("0");
 }
+//
