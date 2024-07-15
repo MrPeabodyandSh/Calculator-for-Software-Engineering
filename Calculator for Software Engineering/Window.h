@@ -46,8 +46,6 @@ class Window : public wxFrame
 	bool tanClick = false;
 
 public:
-
-
 	Window();
 	void ZeroClicked(wxCommandEvent& zero);
 	void OneClicked(wxCommandEvent& one);
@@ -75,3 +73,4 @@ public:
 
 	wxDECLARE_EVENT_TABLE();
 };
+

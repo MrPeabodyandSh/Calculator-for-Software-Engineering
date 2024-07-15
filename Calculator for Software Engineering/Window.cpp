@@ -59,7 +59,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 	decimalButton = new wxButton(this, 22, ".", wxPoint(269, 403), wxSize(50, 50));
 	negativeButton = new wxButton(this, 23, "+/-", wxPoint(167, 403), wxSize(50, 50));
 
-	equation = new wxTextCtrl(this, 24, "", wxPoint(0, 50), wxSize(200, 20));
+	equation = new wxTextCtrl(this, 24, "", wxPoint(0, 50), wxSize(200, 20), wxTE_READONLY);
 	answer = new wxTextCtrl(this, 25, "", wxPoint(300, 50), wxSize(100, 20), wxTE_READONLY);
 }
 
@@ -90,7 +90,7 @@ void Window::ThreeClicked(wxCommandEvent& three)
 
 	equation->WriteText(number);
 }
-
+//
 void Window::FourClicked(wxCommandEvent& four)
 {
 	wxString number = "4";
@@ -304,9 +304,16 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 	{
 		wxString addition;
 		std::string numberAdding;
+		double answer2 = 0;
 
 		wxStringTokenizer equationParse(equation->GetValue(), "+"); //Gets the equation out of the text box
 		numberAdding = equationParse.GetNextToken(); //Parses the equation to make sure it's only getting the numbers
+
+		if (numberAdding == "+" || "*" || "/") //Checks if the text box only has an operation in it or if the first thing in the text box is an invalid operation to be the first thing
+		{
+			return;
+		}
+
 		Answer = stod(numberAdding);
 
 		while (equationParse.HasMoreTokens()) //While there are still numbers in the equation it will go through and add the numbers together
@@ -327,7 +334,13 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		std::string numberSubtract;
 
 		wxStringTokenizer equationParse(equation->GetValue(), "-");
-		numberSubtract = equationParse.GetNextToken();
+		numberSubtract = equationParse.GetNextToken(); \
+
+		if (numberSubtract == "+" || "*" || "/")
+		{
+			return;
+		}
+
 		Answer = stod(numberSubtract);
 
 		while (equationParse.HasMoreTokens())
@@ -357,6 +370,12 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 
 		wxStringTokenizer equationParse(equation->GetValue(), "*");
 		numberMultiply = equationParse.GetNextToken();
+
+		if (numberMultiply == "+" || "*" || "/")
+		{
+			return;
+		}
+		
 		Answer = stod(numberMultiply);
 
 		while (equationParse.HasMoreTokens())
@@ -378,6 +397,12 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 
 		wxStringTokenizer equationParse(equation->GetValue(), "/");
 		numberDivide = equationParse.GetNextToken();
+
+		if (numberDivide == "+" || "*" || "/")
+		{
+			return;
+		}
+
 		Answer = stod(numberDivide);
 
 		while (equationParse.HasMoreTokens())
@@ -399,6 +424,12 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 
 		wxStringTokenizer equationParse(equation->GetValue(), "%");
 		numberMod = equationParse.GetNextToken();
+
+		if (numberMod == "+" || "*" || "/")
+		{
+			return;
+		}
+
 		Answer = stod(numberMod);
 		Answer = Answer / 100;
 		modulo = std::to_string(Answer);
@@ -419,6 +450,12 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		}
 
 		Sin.pop_back();
+
+		if (Sin == "") //Checking if anything is inside the trig function
+		{
+			return;
+		}
+
 		number = std::stod(Sin);
 		Answer = sin(number);
 		fin = std::to_string(Answer);
@@ -440,6 +477,12 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		}
 
 		Cos.pop_back();
+
+		if (Cos == "")
+		{
+			return;
+		}
+
 		number = std::stod(Cos);
 		Answer = cos(number);
 		fin = std::to_string(Answer);
@@ -460,6 +503,12 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		}
 
 		Tan.pop_back();
+
+		if (Tan == "") 
+		{
+			return;
+		}
+
 		number = std::stod(Tan);
 		Answer = tan(number);
 		fin = std::to_string(Answer);
