@@ -292,7 +292,16 @@ void Window::NegativeClicked(wxCommandEvent& negative)
 		negativeNumber2.pop_back();
 	}
 
-	negativeNumber2 = negativeNumber2 + negativeNumber;
+	if (negativeNumber2.length() == 1) //if else here in case user wants to make the first number negative
+	{
+		negativeNumber2 = negativeNumber;
+	}
+
+	else
+	{
+		negativeNumber2 = negativeNumber2 + negativeNumber;
+	}
+	
 
 	equation->Clear();
 	equation->AppendText(negativeNumber2);
@@ -338,9 +347,9 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 
 		wxStringTokenizer equationParse(equation->GetValue(), "-");
 		numberSubtract = equationParse.GetNextToken(); \
-		check = numberSubtract;
+			check = numberSubtract;
 
-		if (check.ToDouble(check2) == false) 
+		if (check.ToDouble(check2) == false)
 		{
 			return;
 		}
@@ -382,7 +391,7 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		{
 			return;
 		}
-		
+
 		Answer = stod(numberMultiply);
 
 		while (equationParse.HasMoreTokens())
@@ -517,7 +526,7 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 
 		Tan.pop_back();
 
-		if (Tan == "") 
+		if (Tan == "")
 		{
 			return;
 		}
