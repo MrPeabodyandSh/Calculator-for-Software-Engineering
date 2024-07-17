@@ -1,9 +1,9 @@
 #include "Window.h"
-#include "Math.h"
 #include <cmath>
 #include <algorithm>
 #include <string>
 #include <iostream>
+#include "ButtonFactory.h"
 
 wxBEGIN_EVENT_TABLE(Window, wxFrame)
 EVT_BUTTON(1, Window::ZeroClicked)
@@ -34,30 +34,30 @@ wxEND_EVENT_TABLE()
 
 Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), wxSize(500, 500))
 {
-	zeroButton = new wxButton(this, 1, "0", wxPoint(218, 403), wxSize(50, 50));
-	oneButton = new wxButton(this, 2, "1", wxPoint(167, 352), wxSize(50, 50));
-	twoButton = new wxButton(this, 3, "2", wxPoint(218, 352), wxSize(50, 50));
-	threeButton = new wxButton(this, 4, "3", wxPoint(269, 352), wxSize(50, 50));
-	fourButton = new wxButton(this, 5, "4", wxPoint(167, 301), wxSize(50, 50));
-	fiveButton = new wxButton(this, 6, "5", wxPoint(218, 301), wxSize(50, 50));
-	sixButton = new wxButton(this, 7, "6", wxPoint(269, 301), wxSize(50, 50));
-	sevenButton = new wxButton(this, 8, "7", wxPoint(167, 250), wxSize(50, 50));
-	eightButton = new wxButton(this, 9, "8", wxPoint(218, 250), wxSize(50, 50));
-	nineButton = new wxButton(this, 10, "9", wxPoint(269, 250), wxSize(50, 50));
+	zeroButton = ButtonFactory::CreateZeroButton(this); //new wxButton(this, 1, "0", wxPoint(218, 403), wxSize(50, 50));
+	oneButton = ButtonFactory::CreateOneButton(this);
+	twoButton = ButtonFactory::CreateTwoButton(this);
+	threeButton = ButtonFactory::CreateThreeButton(this);
+	fourButton = ButtonFactory::CreateFourButton(this);
+	fiveButton = ButtonFactory::CreateFiveButton(this);
+	sixButton = ButtonFactory::CreateSixButton(this);
+	sevenButton = ButtonFactory::CreateSevenButton(this);
+	eightButton = ButtonFactory::CreateEightButton(this);
+	nineButton = ButtonFactory::CreateNineButton(this);
 
-	addButton = new wxButton(this, 11, "+", wxPoint(320, 250), wxSize(50, 50));
-	subtractButton = new wxButton(this, 12, "-", wxPoint(320, 301), wxSize(50, 50));
-	multiplyButton = new wxButton(this, 13, "*", wxPoint(320, 352), wxSize(50, 50));
-	divideButton = new wxButton(this, 14, "/", wxPoint(320, 403), wxSize(50, 50));
-	equalsButton = new wxButton(this, 15, "=", wxPoint(371, 403), wxSize(50, 50));
-	clearButton = new wxButton(this, 16, "Clear", wxPoint(269, 199), wxSize(50, 50));
-	moduloButton = new wxButton(this, 17, "%", wxPoint(116, 250), wxSize(50, 50));
-	sinButton = new wxButton(this, 18, "sin", wxPoint(218, 199), wxSize(50, 50));
-	cosButton = new wxButton(this, 19, "cos", wxPoint(167, 199), wxSize(50, 50));
-	tanButton = new wxButton(this, 20, "tan", wxPoint(116, 199), wxSize(50, 50));
-	backspaceButton = new wxButton(this, 21, "Back", wxPoint(320, 199), wxSize(50, 50));
-	decimalButton = new wxButton(this, 22, ".", wxPoint(269, 403), wxSize(50, 50));
-	negativeButton = new wxButton(this, 23, "+/-", wxPoint(167, 403), wxSize(50, 50));
+	addButton = ButtonFactory::CreateAddButton(this);
+	subtractButton = ButtonFactory::CreateSubtractButton(this);
+	multiplyButton = ButtonFactory::CreateMultiplyButton(this);
+	divideButton = ButtonFactory::CreateDivideButton(this);
+	equalsButton = ButtonFactory::CreateEqualsButton(this);
+	clearButton = ButtonFactory::CreateClearButton(this);
+	moduloButton = ButtonFactory::CreateModuloButton(this);
+	sinButton = ButtonFactory::CreateSinButton(this);
+	cosButton = ButtonFactory::CreateCosButton(this);
+	tanButton = ButtonFactory::CreateTanButton(this);
+	backspaceButton = ButtonFactory::CreateBackspaceButton(this);
+	decimalButton = ButtonFactory::CreateDecimalButton(this);
+	negativeButton = ButtonFactory::CreateNegativeButton(this);
 
 	equation = new wxTextCtrl(this, 24, "", wxPoint(0, 50), wxSize(200, 20), wxTE_READONLY);
 	answer = new wxTextCtrl(this, 25, "", wxPoint(300, 50), wxSize(100, 20), wxTE_READONLY);
@@ -304,12 +304,13 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 	{
 		wxString addition;
 		std::string numberAdding;
-		double answer2 = 0;
-
+		wxString check;
+		double* check2 = new double();
 		wxStringTokenizer equationParse(equation->GetValue(), "+"); //Gets the equation out of the text box
 		numberAdding = equationParse.GetNextToken(); //Parses the equation to make sure it's only getting the numbers
+		check = numberAdding;
 
-		if (numberAdding == "+" || "*" || "/") //Checks if the text box only has an operation in it or if the first thing in the text box is an invalid operation to be the first thing
+		if (check.ToDouble(check2) == false) //Checks if the text box only has an operation in it or if the first thing in the text box is an invalid operation to be the first thing
 		{
 			return;
 		}
@@ -332,11 +333,14 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		wxString subtraction;
 		std::string Equation;
 		std::string numberSubtract;
+		wxString check;
+		double* check2 = new double();
 
 		wxStringTokenizer equationParse(equation->GetValue(), "-");
 		numberSubtract = equationParse.GetNextToken(); \
+		check = numberSubtract;
 
-		if (numberSubtract == "+" || "*" || "/")
+		if (check.ToDouble(check2) == false) 
 		{
 			return;
 		}
@@ -367,11 +371,14 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		wxString multiply;
 		std::string Equation;
 		std::string numberMultiply;
+		wxString check;
+		double* check2 = new double();
 
 		wxStringTokenizer equationParse(equation->GetValue(), "*");
 		numberMultiply = equationParse.GetNextToken();
+		check = numberMultiply;
 
-		if (numberMultiply == "+" || "*" || "/")
+		if (check.ToDouble(check2) == false)
 		{
 			return;
 		}
@@ -394,11 +401,14 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		wxString division;
 		std::string Equation;
 		std::string numberDivide;
+		wxString check;
+		double* check2 = new double();
 
 		wxStringTokenizer equationParse(equation->GetValue(), "/");
 		numberDivide = equationParse.GetNextToken();
+		check = numberDivide;
 
-		if (numberDivide == "+" || "*" || "/")
+		if (check.ToDouble(check2) == false)
 		{
 			return;
 		}
@@ -421,11 +431,14 @@ void Window::EqualsClicked(wxCommandEvent& equals)
 		wxString modulo;
 		std::string Equation;
 		std::string numberMod;
+		wxString check;
+		double* check2 = new double();
 
 		wxStringTokenizer equationParse(equation->GetValue(), "%");
 		numberMod = equationParse.GetNextToken();
+		check = numberMod;
 
-		if (numberMod == "+" || "*" || "/")
+		if (check.ToDouble(check2) == false)
 		{
 			return;
 		}

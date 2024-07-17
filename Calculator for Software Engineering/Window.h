@@ -3,6 +3,7 @@
 #include <wx/tokenzr.h>
 #include <algorithm>
 
+
 class Window : public wxFrame
 {
 	wxButton* zeroButton = nullptr;
@@ -46,6 +47,7 @@ class Window : public wxFrame
 	bool tanClick = false;
 
 public:
+
 	Window();
 	void ZeroClicked(wxCommandEvent& zero);
 	void OneClicked(wxCommandEvent& one);
@@ -70,6 +72,8 @@ public:
 	void NegativeClicked(wxCommandEvent& negative);
 	void EqualsClicked(wxCommandEvent& equals);
 	void ClearClicked(wxCommandEvent& clear);
+
+	//wxButton* CreateZeroButton(wxCommandEvent& creation);
 
 	wxDECLARE_EVENT_TABLE();
 };
