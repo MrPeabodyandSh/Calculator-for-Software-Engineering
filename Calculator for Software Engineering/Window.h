@@ -73,7 +73,7 @@ public:
 	void EqualsClicked(wxCommandEvent& equals);
 	void ClearClicked(wxCommandEvent& clear);
 
-	//wxButton* CreateZeroButton(wxCommandEvent& creation);
+	
 
 	wxDECLARE_EVENT_TABLE();
 };

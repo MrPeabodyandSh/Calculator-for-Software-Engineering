@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include "ButtonFactory.h"
+#include "CalculatorProcessing.h"
 
 wxBEGIN_EVENT_TABLE(Window, wxFrame)
 EVT_BUTTON(1, Window::ZeroClicked)
@@ -61,6 +62,7 @@ Window::Window() : wxFrame(nullptr, wxID_ANY, "Calculator", wxPoint(200, 200), w
 
 	equation = new wxTextCtrl(this, 24, "", wxPoint(0, 50), wxSize(200, 20), wxTE_READONLY);
 	answer = new wxTextCtrl(this, 25, "", wxPoint(300, 50), wxSize(100, 20), wxTE_READONLY);
+
 }
 
 void Window::ZeroClicked(wxCommandEvent& zero)
@@ -135,7 +137,7 @@ void Window::NineClicked(wxCommandEvent& nine)
 
 void Window::AddClicked(wxCommandEvent& add)
 {
-	wxString operation = "+";
+	wxString operation = " + ";
 
 	equation->WriteText(operation);
 
@@ -148,7 +150,7 @@ void Window::AddClicked(wxCommandEvent& add)
 
 void Window::SubtractClicked(wxCommandEvent& subtract)
 {
-	wxString operation = "-";
+	wxString operation = " - ";
 
 	equation->WriteText(operation);
 
@@ -161,7 +163,7 @@ void Window::SubtractClicked(wxCommandEvent& subtract)
 
 void Window::MultiplyClicked(wxCommandEvent& multiply)
 {
-	wxString operation = "*";
+	wxString operation = " * ";
 
 	equation->WriteText(operation);
 
@@ -174,7 +176,7 @@ void Window::MultiplyClicked(wxCommandEvent& multiply)
 
 void Window::DivideClicked(wxCommandEvent& divide)
 {
-	wxString operation = "/";
+	wxString operation = " / ";
 
 	equation->WriteText(operation);
 
@@ -187,7 +189,7 @@ void Window::DivideClicked(wxCommandEvent& divide)
 
 void Window::ModuloClicked(wxCommandEvent& modulo)
 {
-	wxString operation = "%";
+	wxString operation = " % ";
 
 	equation->WriteText(operation);
 
@@ -200,7 +202,7 @@ void Window::ModuloClicked(wxCommandEvent& modulo)
 
 void Window::SinClicked(wxCommandEvent& Sin)
 {
-	wxString operation = "sin()";
+	wxString operation = " sin ";
 
 	//cmath header has stuff for sin, cos, and tan so use it
 	equation->WriteText(operation);
@@ -210,7 +212,7 @@ void Window::SinClicked(wxCommandEvent& Sin)
 
 void Window::CosClicked(wxCommandEvent& Cos)
 {
-	wxString operation = "cos()";
+	wxString operation = " cos ";
 
 	equation->WriteText(operation);
 
@@ -219,7 +221,7 @@ void Window::CosClicked(wxCommandEvent& Cos)
 
 void Window::TanClicked(wxCommandEvent& Tan)
 {
-	wxString operation = "tan()";
+	wxString operation = " tan ";
 
 	equation->WriteText(operation);
 
@@ -309,234 +311,12 @@ void Window::NegativeClicked(wxCommandEvent& negative)
 
 void Window::EqualsClicked(wxCommandEvent& equals)
 {
-	if (addClick)
-	{
-		wxString addition;
-		std::string numberAdding;
-		wxString check;
-		double* check2 = new double();
-		wxStringTokenizer equationParse(equation->GetValue(), "+"); //Gets the equation out of the text box
-		numberAdding = equationParse.GetNextToken(); //Parses the equation to make sure it's only getting the numbers
-		check = numberAdding;
-
-		if (check.ToDouble(check2) == false) //Checks if the text box only has an operation in it or if the first thing in the text box is an invalid operation to be the first thing
-		{
-			return;
-		}
-
-		Answer = stod(numberAdding);
-
-		while (equationParse.HasMoreTokens()) //While there are still numbers in the equation it will go through and add the numbers together
-		{
-			numberAdding = equationParse.GetNextToken();
-			Answer += stod(numberAdding);
-		}
-
-		addition = std::to_string(Answer);
-		answer->SetLabel(addition); //Sets the answer to the number gotten from the addition
-		addClick = false;
-	}
-
-	if (subtractClick)
-	{
-		wxString subtraction;
-		std::string Equation;
-		std::string numberSubtract;
-		wxString check;
-		double* check2 = new double();
-
-		wxStringTokenizer equationParse(equation->GetValue(), "-");
-		numberSubtract = equationParse.GetNextToken(); \
-			check = numberSubtract;
-
-		if (check.ToDouble(check2) == false)
-		{
-			return;
-		}
-
-		Answer = stod(numberSubtract);
-
-		while (equationParse.HasMoreTokens())
-		{
-			numberSubtract = equationParse.GetNextToken();
-
-			if (numberSubtract == "") //Deals with double negatives
-			{
-				numberSubtract = equationParse.GetNextToken();
-				Answer += stod(numberSubtract);
-				break;
-			}
-
-			Answer -= stof(numberSubtract);
-		}
-
-		subtraction = std::to_string(Answer);
-		answer->SetLabel(subtraction);
-		subtractClick = false;
-	}
-
-	if (multiplyClick)
-	{
-		wxString multiply;
-		std::string Equation;
-		std::string numberMultiply;
-		wxString check;
-		double* check2 = new double();
-
-		wxStringTokenizer equationParse(equation->GetValue(), "*");
-		numberMultiply = equationParse.GetNextToken();
-		check = numberMultiply;
-
-		if (check.ToDouble(check2) == false)
-		{
-			return;
-		}
-
-		Answer = stod(numberMultiply);
-
-		while (equationParse.HasMoreTokens())
-		{
-			numberMultiply = equationParse.GetNextToken();
-			Answer *= stod(numberMultiply);
-		}
-
-		multiply = std::to_string(Answer);
-		answer->SetLabel(multiply);
-		multiplyClick = false;
-	}
-
-	if (divideClick)
-	{
-		wxString division;
-		std::string Equation;
-		std::string numberDivide;
-		wxString check;
-		double* check2 = new double();
-
-		wxStringTokenizer equationParse(equation->GetValue(), "/");
-		numberDivide = equationParse.GetNextToken();
-		check = numberDivide;
-
-		if (check.ToDouble(check2) == false)
-		{
-			return;
-		}
-
-		Answer = stod(numberDivide);
-
-		while (equationParse.HasMoreTokens())
-		{
-			numberDivide = equationParse.GetNextToken();
-			Answer /= stod(numberDivide);
-		}
-
-		division = std::to_string(Answer);
-		answer->SetLabel(division);
-		divideClick = false;
-	}
-
-	if (moduloClick)
-	{
-		wxString modulo;
-		std::string Equation;
-		std::string numberMod;
-		wxString check;
-		double* check2 = new double();
-
-		wxStringTokenizer equationParse(equation->GetValue(), "%");
-		numberMod = equationParse.GetNextToken();
-		check = numberMod;
-
-		if (check.ToDouble(check2) == false)
-		{
-			return;
-		}
-
-		Answer = stod(numberMod);
-		Answer = Answer / 100;
-		modulo = std::to_string(Answer);
-		answer->SetLabel(modulo);
-		moduloClick = false;
-	}
-
-	if (sinClick)
-	{
-		wxStringTokenizer equationParse(equation->GetValue(), "sin(", ")");
-		std::string Sin;
-		double number = 0;
-		std::string fin;
-
-		while (equationParse.HasMoreTokens())
-		{
-			Sin = equationParse.GetNextToken();
-		}
-
-		Sin.pop_back();
-
-		if (Sin == "") //Checking if anything is inside the trig function
-		{
-			return;
-		}
-
-		number = std::stod(Sin);
-		Answer = sin(number);
-		fin = std::to_string(Answer);
-		answer->SetLabel(fin);
-		sinClick = false;
-
-	}
-
-	if (cosClick)
-	{
-		wxStringTokenizer equationParse(equation->GetValue(), "cos(", ")");
-		std::string Cos;
-		double number = 0;
-		std::string fin;
-
-		while (equationParse.HasMoreTokens())
-		{
-			Cos = equationParse.GetNextToken();
-		}
-
-		Cos.pop_back();
-
-		if (Cos == "")
-		{
-			return;
-		}
-
-		number = std::stod(Cos);
-		Answer = cos(number);
-		fin = std::to_string(Answer);
-		answer->SetLabel(fin);
-		cosClick = false;
-	}
-
-	if (tanClick)
-	{
-		wxStringTokenizer equationParse(equation->GetValue(), "tan(", ")");
-		std::string Tan;
-		double number = 0;
-		std::string fin;
-
-		while (equationParse.HasMoreTokens())
-		{
-			Tan = equationParse.GetNextToken();
-		}
-
-		Tan.pop_back();
-
-		if (Tan == "")
-		{
-			return;
-		}
-
-		number = std::stod(Tan);
-		Answer = tan(number);
-		fin = std::to_string(Answer);
-		answer->SetLabel(fin);
-		tanClick = false;
-	}
+	std::string answerString;
+	wxString answerWx;
+	answerString = equation->GetValue();
+	Answer = CalculatorProcessing::Instance()->Calculate(answerString);
+	answerWx = std::to_string(Answer);
+	answer->SetLabel(answerWx);
 }
 
 void Window::ClearClicked(wxCommandEvent& clear)
