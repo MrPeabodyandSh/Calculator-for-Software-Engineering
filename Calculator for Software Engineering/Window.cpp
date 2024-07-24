@@ -141,11 +141,7 @@ void Window::AddClicked(wxCommandEvent& add)
 
 	equation->WriteText(operation);
 
-	addClick = true;
-	subtractClick = false;
-	multiplyClick = false;
-	divideClick = false;
-	moduloClick = false;
+	
 }
 
 void Window::SubtractClicked(wxCommandEvent& subtract)
@@ -154,11 +150,7 @@ void Window::SubtractClicked(wxCommandEvent& subtract)
 
 	equation->WriteText(operation);
 
-	addClick = false;
-	subtractClick = true;
-	multiplyClick = false;
-	divideClick = false;
-	moduloClick = false;
+	
 }
 
 void Window::MultiplyClicked(wxCommandEvent& multiply)
@@ -167,11 +159,7 @@ void Window::MultiplyClicked(wxCommandEvent& multiply)
 
 	equation->WriteText(operation);
 
-	addClick = false;
-	subtractClick = false;
-	multiplyClick = true;
-	divideClick = false;
-	moduloClick = false;
+	
 }
 
 void Window::DivideClicked(wxCommandEvent& divide)
@@ -180,11 +168,7 @@ void Window::DivideClicked(wxCommandEvent& divide)
 
 	equation->WriteText(operation);
 
-	addClick = false;
-	subtractClick = false;
-	multiplyClick = false;
-	divideClick = true;
-	moduloClick = false;
+	
 }
 
 void Window::ModuloClicked(wxCommandEvent& modulo)
@@ -193,11 +177,7 @@ void Window::ModuloClicked(wxCommandEvent& modulo)
 
 	equation->WriteText(operation);
 
-	addClick = false;
-	subtractClick = false;
-	multiplyClick = false;
-	divideClick = false;
-	moduloClick = true;
+	
 }
 
 void Window::SinClicked(wxCommandEvent& Sin)
@@ -207,7 +187,7 @@ void Window::SinClicked(wxCommandEvent& Sin)
 	//cmath header has stuff for sin, cos, and tan so use it
 	equation->WriteText(operation);
 
-	sinClick = true;
+	
 }
 
 void Window::CosClicked(wxCommandEvent& Cos)
@@ -216,7 +196,7 @@ void Window::CosClicked(wxCommandEvent& Cos)
 
 	equation->WriteText(operation);
 
-	cosClick = true;
+	
 }
 
 void Window::TanClicked(wxCommandEvent& Tan)
@@ -225,7 +205,7 @@ void Window::TanClicked(wxCommandEvent& Tan)
 
 	equation->WriteText(operation);
 
-	tanClick = true;
+	
 }
 
 void Window::BackspaceClicked(wxCommandEvent& backspace)
@@ -242,7 +222,8 @@ void Window::BackspaceClicked(wxCommandEvent& backspace)
 	toBackspace = Backspace;
 	toBackspace.pop_back();
 	Backspace = toBackspace;
-	equation->SetLabel(Backspace);
+	equation->Clear();
+	equation->AppendText(Backspace);
 
 }
 
@@ -323,10 +304,4 @@ void Window::ClearClicked(wxCommandEvent& clear)
 {
 	equation->SetLabel("");
 	answer->SetLabel("");
-
-	addClick = false;
-	subtractClick = false;
-	multiplyClick = false;
-	divideClick = false;
-	moduloClick = false;
 }

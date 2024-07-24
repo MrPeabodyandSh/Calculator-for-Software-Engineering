@@ -37,14 +37,6 @@ class Window : public wxFrame
 	wxString SecondNumber;
 
 	double Answer = 0;
-	bool addClick = false;
-	bool subtractClick = false;
-	bool multiplyClick = false;
-	bool divideClick = false;
-	bool moduloClick = false;
-	bool sinClick = false;
-	bool cosClick = false;
-	bool tanClick = false;
 
 public:
 
