@@ -23,6 +23,5 @@ private:
 	std::vector<std::string> holding;
 	std::vector<std::string> output;
 	std::vector<std::string> solve;
-	std::vector<std::string> solve2;
 };
 

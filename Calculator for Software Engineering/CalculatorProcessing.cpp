@@ -393,7 +393,8 @@ double CalculatorProcessing::Calculate(std::string equation)
 					
 					else
 					{
-						solve.emplace(solve.begin() + 1, stringCatch);
+						solve.emplace(solve.begin() + offset5, stringCatch);
+						i -= 2;
 					}
 
 					
