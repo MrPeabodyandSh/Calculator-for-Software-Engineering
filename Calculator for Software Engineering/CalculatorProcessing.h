@@ -9,13 +9,13 @@ class CalculatorProcessing
 {
 public:
 
+	CalculatorProcessing();
 	static CalculatorProcessing* Instance();
-    double Calculate(std::string equation);
+	double Calculate(std::string equation);
 	static CalculatorProcessing* GetInstance();
 
 protected:
 
-	CalculatorProcessing();
 
 private:
 
